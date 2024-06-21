@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <BrowserRouter>
           <Routes>
-            <Route exact path="/signin" Component={Signin} />
+            <Route exact path="/" Component={Signin} />
             <Route exact path="/register" Component={Register} />
           </Routes>
         </BrowserRouter>

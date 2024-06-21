@@ -1,83 +1,89 @@
-import React from "react";
-import "./index.css";
+import React, { useState } from "react";
 import axios from "axios";
-
 import { Link } from "react-router-dom";
 
 export default function Register() {
-  const submit = (e) => {
+  const [formData, setFormData] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("localhost:3000/register").then((res) => res.data);
+    axios
+      .post("http://localhost:3002/register", formData)
+      .then((res) => {
+        console.log("Réponse du serveur:", res.data);
+        // Traitez la réponse ici, par exemple, affichez un message de confirmation
+      })
+      .catch((error) => {
+        console.error("Erreur lors de l'inscription:", error);
+        // Gérez les erreurs ici, par exemple, affichez un message d'erreur à l'utilisateur
+      });
   };
 
   return (
     <div className="text-center">
-      <form onSubmit={(e) => submit(e)} className="form-signin">
-        <img
-          className="mb-4"
-          src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
-          alt=""
-          width="72"
-          height="72"
-        />
-        <h1 className="h3 mb-3 font-weight-normal">Please register</h1>
-        <label for="inputEmail" className="sr-only">
-          Email address
-        </label>
+      <form onSubmit={handleSubmit} className="form-signin">
+        {/* Vos champs de formulaire */}
         <input
           type="email"
           id="inputEmail"
+          name="email"
           className="form-control"
           placeholder="Email address"
           required
-          autofocus
+          autoFocus
+          value={formData.email}
+          onChange={handleChange}
         />
 
-        <label for="inputFirstName" className="sr-only">
-          Fisrt Name
-        </label>
         <input
           type="text"
           id="inputFirstName"
+          name="firstName"
           className="form-control"
-          placeholder="Fisrt Name"
+          placeholder="First Name"
           required
-          autofocus
+          value={formData.firstName}
+          onChange={handleChange}
         />
-        <label for="inputLastName" className="sr-only">
-          Last Name
-        </label>
+
         <input
           type="text"
           id="inputLastName"
+          name="lastName"
           className="form-control"
           placeholder="Last Name"
           required
-          autofocus
+          value={formData.lastName}
+          onChange={handleChange}
         />
-        <label for="inputPassword" className="sr-only">
-          Password
-        </label>
+
         <input
           type="password"
           id="inputPassword"
+          name="password"
           className="form-control"
           placeholder="Password"
           required
+          value={formData.password}
+          onChange={handleChange}
         />
-        <Link
-          to={"/register"}
-          className="btn btn-lg btn-primary btn-block"
-          type="submit"
-        >
-          Register
-        </Link>
 
-        <Link
-          to={"/signin"}
-          className="btn btn-lg btn-primary btn-block"
-          type="submit"
-        >
+        {/* Bouton de soumission */}
+        <button className="btn btn-lg btn-primary btn-block" type="submit">
+          Register
+        </button>
+
+        {/* Lien vers la page de connexion */}
+        <Link to="/" className="btn btn-lg btn-primary btn-block">
           Sign in
         </Link>
       </form>

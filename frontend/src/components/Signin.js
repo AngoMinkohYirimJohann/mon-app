@@ -8,13 +8,13 @@ export default function Signin() {
       <form className="form-signin">
         <img
           className="mb-4"
-          src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg"
+          src="https://previews.123rf.com/images/urfandadashov/urfandadashov1809/urfandadashov180902609/109317497-ic%C3%B4ne-de-vecteur-de-formulaire-de-commande-isol%C3%A9-sur-fond-transparent-concept-de-logo-de-formulaire.jpg"
           alt=""
           width="72"
           height="72"
         />
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" className="sr-only">
+        <label htmlFor="inputEmail" className="sr-only">
           Email address
         </label>
         <input
@@ -25,7 +25,7 @@ export default function Signin() {
           required
           autofocus
         />
-        <label for="inputPassword" className="sr-only">
+        <label htmlFor="inputPassword" className="sr-only">
           Password
         </label>
         <input
@@ -41,7 +41,7 @@ export default function Signin() {
           </label>
         </div>
         <Link
-          to={"/signin"}
+          to={"/"}
           className="btn btn-lg btn-primary btn-block"
           type="submit"
         >
