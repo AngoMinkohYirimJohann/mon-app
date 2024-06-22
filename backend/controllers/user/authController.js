@@ -1,11 +1,10 @@
 const User = require("../../models/user");
 
 module.exports = {
-  signIn(req, res) {
-    const { email, password } = req.body;
+  async signIn(req, res) {
     res.json({ message: "Connectez-vous!" });
   },
-  async register(req, res) {
+  register(req, res) {
     const { firstName, lastName, email, password } = req.body;
     try {
       const newUser = new User({ firstName, lastName, email, password });
