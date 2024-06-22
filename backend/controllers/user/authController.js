@@ -8,7 +8,7 @@ module.exports = {
     const { firstName, lastName, email, password } = req.body;
     try {
       const newUser = new User({ firstName, lastName, email, password });
-      await newUser.save();
+      newUser.save();
       res.status(201).json(newUser);
     } catch (err) {
       res.status(500).json({ error: err.message });
