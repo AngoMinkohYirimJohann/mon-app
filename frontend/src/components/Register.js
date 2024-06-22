@@ -17,7 +17,7 @@ export default function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3002/register", formData)
+      .post("http://localhost:3002/user/register", formData)
       .then((res) => {
         console.log("Réponse du serveur:", res.data);
         // Traitez la réponse ici, par exemple, affichez un message de confirmation
@@ -31,6 +31,7 @@ export default function Register() {
   return (
     <div className="text-center">
       <form onSubmit={handleSubmit} className="form-signin">
+        <h1 className="h3 mb-3 font-weight-normal">Please register</h1>
         {/* Vos champs de formulaire */}
         <input
           type="email"

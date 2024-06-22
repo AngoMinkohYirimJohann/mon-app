@@ -1,7 +1,8 @@
-const User = require("../../models/userModels/user.model");
+const User = require("../../models/user");
 
 module.exports = {
-  async signIn(req, res) {
+  signIn(req, res) {
+    const { email, password } = req.body;
     res.json({ message: "Connectez-vous!" });
   },
   async register(req, res) {

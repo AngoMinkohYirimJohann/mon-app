@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./index.css";
 import { Link } from "react-router-dom";
 
 export default function Signin() {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3002/user/signin", formData)
+      .then((res) => {
+        console.log("Réponse du serveur:", res.data);
+        // Traitez la réponse ici, par exemple, affichez un message de confirmation
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la connexion:", error);
+        // Gérez les erreurs ici, par exemple, affichez un message d'erreur à l'utilisateur
+      });
+  };
+
   return (
     <div className="text-center">
-      <form className="form-signin">
-        <img
-          className="mb-4"
-          src="https://previews.123rf.com/images/urfandadashov/urfandadashov1809/urfandadashov180902609/109317497-ic%C3%B4ne-de-vecteur-de-formulaire-de-commande-isol%C3%A9-sur-fond-transparent-concept-de-logo-de-formulaire.jpg"
-          alt=""
-          width="72"
-          height="72"
-        />
+      <form onSubmit={handleSubmit} className="form-signin">
         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label htmlFor="inputEmail" className="sr-only">
           Email address
@@ -23,7 +40,8 @@ export default function Signin() {
           className="form-control"
           placeholder="Email address"
           required
-          autofocus
+          autoFocus
+          onChange={handleChange}
         />
         <label htmlFor="inputPassword" className="sr-only">
           Password
@@ -34,19 +52,16 @@ export default function Signin() {
           className="form-control"
           placeholder="Password"
           required
+          onChange={handleChange}
         />
         <div className="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me" /> Remember me
           </label>
         </div>
-        <Link
-          to={"/"}
-          className="btn btn-lg btn-primary btn-block"
-          type="submit"
-        >
+        <button className="btn btn-lg btn-primary btn-block" type="submit">
           Sign in
-        </Link>
+        </button>
         <Link
           to={"/register"}
           className="btn btn-lg btn-primary btn-block"
