@@ -1,7 +1,7 @@
 const User = require("../../models/user");
 
 module.exports = {
-  async signIn(req, res) {
+  signIn(req, res) {
     res.json({ message: "Connectez-vous!" });
   },
   register(req, res) {
