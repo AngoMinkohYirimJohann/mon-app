@@ -1,3 +1,5 @@
+"use strict";
+
 const express = require("express");
 const cors = require("cors");
 const userRoute = require("./routes/user");
@@ -9,4 +11,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/user", userRoute);
 
-module.exports = app;
+app.listen(process.env.PORT, () => {
+  console.log("Serveur en écoute");
+});
